@@ -1,0 +1,4 @@
+注意diff -c用法
+
+注意字符串为NULL时的corner case
+使用strlen可避免处理corner case

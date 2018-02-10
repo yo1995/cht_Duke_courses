@@ -1,0 +1,23 @@
+CFLAGS=-Wall -Werror -std=gnu++98 -pedantic -ggdb3
+
+numeric: numeric.o parsing.o parsing_define.o parsing_eval.o parsing_gradint.o parsing_mcint.o parsing_numint.o helpers.o
+	g++ -o numeric $(CFLAGS) numeric.o parsing.o parsing_define.o parsing_eval.o parsing_gradint.o parsing_mcint.o parsing_numint.o helpers.o
+numeric.o: numeric.cpp helpers.h parsing.h function.h
+	g++ -c $(CFLAGS) numeric.cpp
+parsing.o: parsing.h function.h parsing_define.h parsing_eval.h parsing_numint.h parsing_mcint.h parsing_gradint.h
+	g++ -c $(CFLAGS) parsing.cpp
+parsing_define.o: parsing_define.h helpers.h
+	g++ -c $(CFLAGS) parsing_define.cpp
+parsing_eval.o: parsing_eval.h helpers.h
+	g++ -c $(CFLAGS) parsing_eval.cpp
+parsing_gradint.o: parsing_gradint.h helpers.h
+	g++ -c $(CFLAGS) parsing_gradint.cpp
+parsing_mcint.o: parsing_mcint.h helpers.h
+	g++ -c $(CFLAGS) parsing_mcint.cpp
+parsing_numint.o: parsing_numint.h helpers.h
+	g++ -c $(CFLAGS) parsing_numint.cpp
+helpers.o: helpers.h
+	g++ -c $(CFLAGS) helpers.cpp
+
+clean:
+	rm -f *~ numeric

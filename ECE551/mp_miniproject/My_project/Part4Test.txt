@@ -1,0 +1,17 @@
+define (g x) = (pow x 2)
+define (squareRoot x) = (sqrt x)
+define (m x) = (+ (pow x 2) (* 2 x))
+
+
+min g -0.5 10 4
+min g 0.1 0.1 0.5
+max g 0.1 0.1 0.5
+max g 0.1 0.05 8
+
+min m 0.1 0.01 20
+max m 0.1 0.5 8
+
+xmin squareRoot 0.1 0.05 -10
+xmax squareRoot 0.1 0.05 -10
+
+

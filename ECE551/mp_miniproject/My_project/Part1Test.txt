@@ -1,0 +1,32 @@
+define (g a) = (pow a 2)
+define (CONST x) = 5
+define (CONST2 x) = (5)
+define (CONST_VAR const) = const
+define (CONST_VAR2 const) = (const)
+define (test x y) = (/ (+ (- (sqrt (g x)) x) y) y)
+
+
+define (MISMATCHPARENTHESIS a b) = (+ a b ))
+define (NOFUNCFOUND first second) = (+ (FUNCNONEXIST first) second)
+define (VAR_MISMATCH x y) = (g x y) 
+
+define (COMPLICATED_SYMBOLS & || *) = (* (+ & ||) (- ... 0))
+
+define (VALID_VARIABLES + -) = (+ + -)
+evaluate (VALID_VARIABLES 5 6)
+
+fagdefine (y x y z) = (pow (+ y z) (sqrt x))
+gafgdefine (d) = (y 2 3)
+
+define (SQRTROOT_OF_X x) = (sqrt x)
+define (DIVISION a b) = (/ a b)
+
+define (SPACING_ERROR a b) = (+(+ a b) b)
+
+define (f x = (+ x 2))
+define (f) = (+ x 2)
+define () = (+ x 2)
+define (f x=a x=b) = (+ x=a x=b)
+define (f x(b b)a ) = (+ x(b b)a )
+
+abcdefinexyz (test x y) = (/ (+ (- (sqrt (g x)) x) y) y)

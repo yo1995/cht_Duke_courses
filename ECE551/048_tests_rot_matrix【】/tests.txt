@@ -1,0 +1,13 @@
+input1.txt 长度大小问题
+input3.txt EOF
+input4.txt 空格字符识别
+input5.txt 可能是extended ascii
+nexist.txt 未检测
+many.txt 未检测
+few.txt 未检测
+long.txt 未检测
+short.txt 未检测
+                             空参数
+0 未知参数
+input1.txt input1.txt 过多参数
+换行符作为参数

@@ -1,0 +1,14 @@
+define (2 x y) = (+ (* 2 x) y)
+define (one x) = x
+define (const a) = 4
+define (m a b c d) = (+ a (+ b (+ c d ) ) ) 
+
+mcint 2 10 -1 1 4 5
+mcint 2 100 -1 1 4 5
+mcint 2 1000 -1 1 4 5
+
+mcint one 100 0 20
+
+mcint const 100 0 50
+
+mcint m 1000 0 10 0 10 0 1 0 1

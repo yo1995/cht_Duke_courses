@@ -1,0 +1,31 @@
+define (TwoDimm x y) = (+ (* 2 x) y)
+define (OneDimm x) = x
+define (constFunction a) = 10
+define(multidem a b c d e) = (+ a (+ b (+ c (+ d e) ) ) ) 
+define (improve x) = (+ (pow (* 2 x) 4) 10)
+
+
+mcint TwoDimm 10 -1 1 4 5
+mcint TwoDimm 100 -1 1 4 5
+mcint TwoDimm 1000 -1 1 4 5
+
+mcint constFunction 1000 0 50
+
+mcint OneDimm 1 0 2.5
+mcint OneDimm 10 0 2.5
+mcint OneDimm 100 0 2.5
+mcint OneDimm 1000 0 2.5
+
+
+mcint TwoDimm 100 0 7 0 4 6 7
+mcint TwoDimm 100 0 7 0 4
+mcint TwoDimm 100 0 
+
+mcint improve 10 0 70
+mcint improve 1 0 70
+mcint improve 0.1 0 70
+mcint improve 0.01 0 70
+//The Improve Function Integrated from range 0 to 70 is exactly 5.3782407e9
+
+mcint multidem 0.01 0 1 0 1 0 1 0 1 0 1
+ 

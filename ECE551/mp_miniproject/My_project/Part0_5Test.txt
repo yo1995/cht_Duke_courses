@@ -1,0 +1,9 @@
+define (COMPLICATED_SYMBOLS & || *) = (* (+ & ||) (- ... 0))
+define (g a) = (pow a 2)
+define (VAR_MISMATCH x y) = (g x y) 
+
+define (p x) = (sin x)
+define (q x) = (cos x)
+define (r x) = (sqrt x)
+define (s x y) = (% x y)
+define (x x) = (log x)

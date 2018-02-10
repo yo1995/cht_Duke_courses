@@ -1,0 +1,8 @@
+define (n x y)=(+ (sin x) y)
+numint n a 0 1 2 3
+numint n 0.01 4  5 6
+numint n 0.01 0 -1 2 3
+numint n 0.00 0 1 
+
+define (2 x y) = (/ (* 2 x) y)
+numint 2 a 0 1 0 3

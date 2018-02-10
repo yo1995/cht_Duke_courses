@@ -1,0 +1,11 @@
+__Alabama:4858979:9
+Alaska:738432:3
+Arizona:6828065:11
+:2978204:6
+ ECE551Island:39144818:55
+Awesome!:5456574:9
+North Carolina'); DROP TABLE STATES; --:3590886: 7
+Delaware:945934:3
+:1:0
+Nor:1:1
+1:1:1

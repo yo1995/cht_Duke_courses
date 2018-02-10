@@ -1,0 +1,8 @@
+define (g x) = (pow (- x 3) 2)
+define (h x y) = (+ (pow x 2) (pow y 2))
+
+min g -0.5 10 4 50
+min g 0.1 0.1 0.5 50
+
+min h -0.5 10 4 4 50
+min h 0.1 0.1 0.5 0.2 50

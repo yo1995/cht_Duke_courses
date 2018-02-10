@@ -1,0 +1,21 @@
+./printStates US_States.txt
+./printEVotes US_States.txt  USVotes1.txt
+./printRecounts US_States.txt  USVotes1.txt
+./printLargeWin US_States.txt  USVotes1.txt
+
+./printStates Simple_States2.txt
+./printEVotes Simple_States.txt  SimpleVotes1.txt
+
+
+./printEVotes US_States.txt  USVotes2.txt
+./printRecounts US_States.txt  USVotes2.txt
+./printLargeWin US_States.txt  USVotes2.txt
+
+
+./printEVotes US_States.txt  USVotes3.txt
+./printRecounts US_States.txt  USVotes3.txt
+./printLargeWin US_States.txt  USVotes3.txt
+
+./printEVotes Simple_States2.txt  SimpleVotes2.txt
+./printRecounts Simple_States2.txt  SimpleVotes2.txt
+./printLargeWin Simple_States2.txt  SimpleVotes2.txt

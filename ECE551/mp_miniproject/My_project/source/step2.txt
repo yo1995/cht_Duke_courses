@@ -1,0 +1,15 @@
+define (2 x y) = (+ (* 2 x) y)
+define (one x) = x
+define (const a) = 4
+define (m a b c d) = (+ a (+ b (+ c d ) ) ) 
+
+numint one 0.1 0 20
+
+numint 2 1 -1 1 4 5
+numint 2 0.1 -1 1 4 5
+numint 2 0.01 -1 1 4 5
+numint 2 0.001 -1 1 4 5
+
+numint const 0.1 0 50
+
+numint m 0.01 0 10 0 10 0 1 0 1

@@ -1,0 +1,8 @@
+1. int 3
+2. double 7.4
+3. int 2.0
+4. double 3.4
+5. int 102
+6. int 4
+7. int -2147483644
+8. double 99.4

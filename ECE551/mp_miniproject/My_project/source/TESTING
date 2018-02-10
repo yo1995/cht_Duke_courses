@@ -1,0 +1,373 @@
+/*****************************************************************************
+Copyright: 2017, Ting
+File name: TESTING(README)
+Description: Description and testing guide of the project.
+Author: Ting
+Version: 1.0
+Date: 12.03
+History: 12.03 - 1.0,
+*****************************************************************************/
+
+## Code structure and brief description:
+
+	Files included: 
+
+	function.h   numeric.cpp         parsing_define.h      parsing_gradient.h  parsing_numint.cpp
+	helpers.cpp  numerics.txt        parsing_eval.cpp      parsing.h           parsing_numint.h
+	helpers.h    parsing.cpp         parsing_eval.h        parsing_mcint.cpp
+	Makefile     parsing_define.cpp  parsing_gradient.cpp  parsing_mcint.h
+
+	numeric.cpp -> MAIN: reads file and pass input to parsing.cpp.
+
+	parsing.cpp -> 1.read-in file content 2.call corresponding parsing functions 3.basic sanitization of commands.
+
+	parsing_*.cpp -> 1.parse corresponding commands and expressions 2.for step 2-4 also do the integrals and gradient
+	            
+	helpers.cpp -> contains multiple functions which makes strings processing easier.
+
+	function.h -> the basic datatype for the entire parsing and evaluating process. 
+
+	*.h -> corresponding header files that contains function prototypes, macro definitions and STL includes.
+
+	Makefile -> project compiles to an executable called numeric
+	
+	TO RUN:
+		./numeric [one_filename]
+
+## Steps of development:
+
+	- STEP 1: Parsing and evaluation.
+
+	This is the most significant and difficult step for the entire project. Without accomplishing this one, the latter functions cannot be built. The importance of designing a good structure is clear: without great design, we have to revisit this part for dozens of times to add or alter some methods and change other things.
+
+	The first half is to parse the function and store the structure of a parsed expression. Despite all the corner cases(which would be discussed about in next section), there are still many issues related with the design - "whether to bind the function name with its arguments", "how to add or delete or find repetition of variables", "should we use reference or return a new object", "how to recursively parse a function inside of a function", etc. After the expression is parsed, we then go to the evaluation part.
+
+	The second half is to evaluate a function with given constants. With the help with former works, it is not as difficult, yet still needs full consideration. Since there are several built-in operators and function names, it is better to investigate how to categorize them. Also, we need to pay attention to how to recursively evaluate a function inside others.
+
+	- STEP 2: Numerical Integration
+
+	This method was widely used and taught in scientific courses. I got to know this numint first in primary calculus classes, and also tried to implement a similar Euler method integral in my Computational Physics class. I have to commit, it is much more easier to implement it with MATLAB.
+
+	There are also design choices for this step. For example, when we choose the midpoints of a certain range, we will face up with the problem of boundary handling. For larger amount of prisms(smaller step size), the problem seems to be neutral. But for extremely large steps, this issue could lead to huge difference.
+
+	However, for higher-dimension integrals, I cannot figure out a way to calculate them efficiently. To my understanding, I have to approximate the midpoint on a hypersurface from different dimensions, which results in not-reducable iterations. To avoid a infinite running time, I add an abort makeshift for considerably longer iterations. (i.e. I decide to offer a choice off if the program will last more than approx. 5 minutes)
+
+	- STEP 3:
+
+	This step is pretty easy. With the structure of STEP 2, I can easily change it to fit STEP 3. Surprisingly, the result is not bad with acceptable trials.
+
+	I've heard of Monte Carlo method in many fields, and this is the first time that I implement it with C++. Meet some minor problems along the way. In order to use the more advanced random number generator, I change to use C++11 standard, which caused some incompatibilty in former code. Fixed them properly.
+
+	- STEP 4:
+
+	Final step is also not too hard. I used a single function to process two types of gradient calculation by passing a flag. For high dimensional cases though, it still seems not to be fully applicable. For functions which have a certain max/min point, it could be approximated. But functions with saddle points or like a flat surface, this approach does not work well. Those issues cannot be categorized into faults, and I will discuss in next section about how to recognize them.
+
+
+## Testing guide:
+
+	- STEP 1: Run ./numeric step1_1.txt step1_2.txt step1tricky.txt
+	- STEP 2: Run ./numeric step2.txt step2tricky.txt
+	- STEP 3: Run ./numeric step3.txt
+	- STEP 4: Run ./numeric step4.txt
+
+	For each step, the cases are categorized into normal ones and tricky ones.
+
+	For normal ones, they are easy to understand and do not need too much explanation. I only list a few results as examples for each step.
+	For tricky ones, I will briefly explain why they are tricky and how did I tackled them.
+
+	There are still many cases that I was missing. Since the time is pretty limited, I really cannot go through all the cases.
+
+	In addition to make sure that right case will pass, I managed to handle exceptions to give as specific as what the problem is.
+
+	Still there will be lots of missing cases, but I am so sleepy right now to think about them. Great Scott I have finally finished this project!
+
+## Error handling:
+	
+	All the considered errors are printed to cerr in each parsing function. Did not use assert or EXIT to abort the program. After an error is met, just stop current procedure and print error message. Then go to next input line.
+
+## Known issues:
+	
+	- operator name:
+	if an operator's name is a substring of the following two strings, then it could be wrongly parsed.
+	"+-*/% pow" "sin cos sqrt log"
+	Since I was about to use a shorter code to do the task, I failed to consider this case. However, it can be easily fixed by seperating each operator in the string into a condition statement.
+	
+	- include hierachy:
+	I was thinking about minimizing the include statements in all the header files, but after changing some functions, I failed to keep the minimum subset of STL and my own header files.
+	However, after I got enough sleep, I can figure this out with some time. Also I think there should be tools to help people to do this sort of job?
+	
+	- Makefile hierachy:
+	Similar to the former one. I designed in first place the file structures, but later mangled it. Hopefully I will handle it sometime.
+	
+
+## Others:
+	
+	Thank you Drew!
+	I really learnt a lot after the whole semester!
+	Still I am not the best, even not among the goods, but I really improved.
+
+
+## Testing Analysis:
+
+    - STEP 1: 
+
+    `Run ./numeric step1_1.txt
+
+		For all the cases, it will print "Successfully defined XXX" at the end, since every define is valid and easy to comprehend.
+		e.g. 
+		[define (MOD x y) = (% x y)] prints [Successfully defined (MOD x y) = (x % y)!]
+
+    `Run ./numeric step1_2.txt
+
+    	Just the same, evaluate those cases and return valid results.
+		e.g. [define (test x y) = (/ (+ (- (sqrt (POW x 3)) x) y) y)] prints [defined (test x y) = (((sqrt(POW(x,3)) - x) + y) / y)!]
+		It should be sqrt(4^3) = 8, 8 - 4 = 4, 4 + 5 = 9; 9 / 5 = 1.8
+		[evaluate (test 4 5)] prints [(test 4 5) = 1.8]
+
+	`Run ./numeric step1tricky.txt
+
+		=== START READING ===
+		Successfully defined (x x) = log(x)!
+		[reason]: function name can be same as variable name
+
+		=== READING NEXT LINE ===
+		Error: No equal sign in input!
+
+		=== READING NEXT LINE ===
+		Successfully defined (g 1 x) = (x + 1)!
+		[reason]: order does not matter
+
+		=== READING NEXT LINE ===
+		Notice: Wow! It is actually a str var!
+		Successfully defined (+ x +y) = (x + +y)!
+		[reason]: operators could make people confused
+
+		=== READING NEXT LINE ===
+		Error: Function name g already exists. Abort re-definition!
+
+		=== READING NEXT LINE ===
+		Error: Function name g already exists. Abort re-definition!
+		[reason]: should be spacing problem. eliminated anyway
+
+		=== READING NEXT LINE ===
+		Error: Parenthes amount mismatch!
+
+		=== READING NEXT LINE ===
+		Error: Operator: WHAT wrong format or not found!
+
+		=== READING NEXT LINE ===
+		Successfully defined (COMPLICATED_SYMBOLS & || *) = (+(&,||) * (* - 0))!
+		[reason]: complicated definition also works!
+
+		=== READING NEXT LINE ===
+		(COMPLICATED_SYMBOLS 3 5 2) = 16
+		[reason]: (3+5)* 2 = 16
+
+		=== READING NEXT LINE ===
+		Error: Invalid expression!
+		[reason]: it should be viewed as a no expression line
+
+		=== READING NEXT LINE ===
+		Error: No argument!
+
+		=== READING NEXT LINE ===
+		Error: No argument!
+		[reason]: same as former one, at least one argument.
+
+		=== READING NEXT LINE ===
+		Successfully defined (f x=a x=b) = +(x=a,x=b)!
+		[reason]: another complicated expression, but also works.
+
+		=== READING NEXT LINE ===
+		Successfully defined (h x-b b*a) = +(x-b,b*a)!
+		[reason]: another complicated expression, but also works.
+
+		=== READING NEXT LINE ===
+		(h 3 4) = 7
+		[reason]: 3+4=7
+
+		=== READING NEXT LINE ===
+		Error: number nan in input is not valid double number!
+		Error: Failed to evaluate!(h 3 0.5f)
+		[reason]: NAN in input
+
+		=== READING NEXT LINE ===
+		Successfully defined (SPACING_ERROR a b) = +(+(a,b),b)!
+		[reason]: changed my parsing strategy to be able to parse this one
+
+		=== READING NEXT LINE ===
+		Successfully defined (SQRTROOT_OF_X x) = sqrt(x)!
+
+		=== READING NEXT LINE ===
+		(SQRTROOT_OF_X 4) = 2
+
+		=== READING NEXT LINE ===
+		Error: Failed to evaluate!(SQRTROOT_OF_X -4)
+		[reason]: also NAN. was about to explain in cerr, but commented. you can still find it in my program.
+
+		=== PROCESS COMPLETE! ===
+
+
+
+
+
+
+	- STEP 2: Run ./numeric step2.txt
+
+		=== START READING ===
+		Successfully defined (2 x y) = ((2 * x) + y)!
+		[reason]: base case provided in numerics.txt
+
+		=== READING NEXT LINE ===
+		Successfully defined (one x) = x!
+		[reason]: mimicking...
+
+		=== READING NEXT LINE ===
+		Successfully defined (const a) = 4!
+
+		=== READING NEXT LINE ===
+		Successfully defined (m a b c d) = (a + (b + (c + d)))!
+
+		=== READING NEXT LINE ===
+		The result of integral one = 200.
+		[reason]: x^2/2 [0, 20] = 200
+
+		=== READING NEXT LINE ===
+		The result of integral 2 = 9.
+		[reason]: base result
+
+		=== READING NEXT LINE ===
+		The result of integral 2 = 9.
+
+		=== READING NEXT LINE ===
+		The result of integral 2 = 9.
+
+		=== READING NEXT LINE ===
+		The result of integral 2 = 9.
+
+		=== READING NEXT LINE ===
+		The result of integral const = 200.
+		[reason]: 4 * 50 = 200
+
+		=== READING NEXT LINE ===
+
+		Try to define input: >> numint m 0.01 0 10 0 10 0 1 0 1 <<.
+		Command is: >> numint <<.
+		Bounds will be parsed in a fashion of min max pairs.
+		Notice: Wow! The integral has huge range. Are you sure about to proceed?
+		Please choose whether to continue? (Y/N)
+		n
+		Warning: The integral is too heavy to handle!
+		[reason]: too heavy to handle, design a makeshift.
+
+		=== READING NEXT LINE ===
+
+		=== PROCESS COMPLETE! ===
+
+
+
+	- STEP 2: Run ./numeric step2tricky.txt
+
+		=== START READING ===
+		Successfully defined (n x y) = (sin(x) + y)!
+
+		=== READING NEXT LINE ===
+		[reason]: step size NAN
+
+		=== READING NEXT LINE ===
+		Error: Invalid input for bounds! Check order, validity and amount of args.
+		[reason]: args missing.
+
+		=== READING NEXT LINE ===
+		Error: Invalid input for bounds! Check order, validity and amount of args.
+		[reason]: max < min
+
+		=== READING NEXT LINE ===
+		Error: Wrong usage(bounds amount) of function n, will abort parsing!
+		[reason]: both amount of args and step size 0
+
+		=== READING NEXT LINE ===
+		Successfully defined (2 x y) = ((2 * x) / y)!
+
+		=== READING NEXT LINE ===
+		[reason]: step size NAN
+
+		=== READING NEXT LINE ===
+
+		=== PROCESS COMPLETE! ===
+
+
+
+
+	- STEP 3: Run ./numeric step3.txt
+
+		=== START READING ===
+		Successfully defined (2 x y) = ((2 * x) + y)!
+
+		=== READING NEXT LINE ===
+		Successfully defined (one x) = x!
+
+		=== READING NEXT LINE ===
+		Successfully defined (const a) = 4!
+
+		=== READING NEXT LINE ===
+		Successfully defined (m a b c d) = (a + (b + (c + d)))!
+
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral 2 = 9.45765.
+
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral 2 = 9.07428.
+
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral 2 = 8.96276.
+		[reason]: increasing trials can give more correct results.	
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral one = 183.664.
+		[reason]: not so close to 200
+
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral const = 200.
+		[reason]: wow.
+
+		=== READING NEXT LINE ===
+		The result of Monte Carlo integral m = 1098.57.
+		[reason]: what we cannot calculate within computational resources could be approximated with mcint.
+
+		=== READING NEXT LINE ===
+
+		=== PROCESS COMPLETE! ===
+
+
+	- STEP 4: Run ./numeric step4.txt
+
+		=== START READING ===
+		Successfully defined (g x) = pow((x - 3),2)!
+
+		=== READING NEXT LINE ===
+		Successfully defined (h x y) = (pow(x,2) + pow(y,2))!
+
+		=== READING NEXT LINE ===
+		The result of Gradient g = 100.
+		[reason]: too large converge distance which result in a instant converge
+
+		=== READING NEXT LINE ===
+		The result of Gradient g = 0.233885.
+		[reason]: still a bit large converge distance, but the result is better.
+
+		=== READING NEXT LINE ===
+		The result of Gradient h = 98.
+		[reason]: too large converge distance
+
+		=== READING NEXT LINE ===
+		The result of Gradient h = 0.196656.
+		[reason]: nearly found the minimum point in x^2+y^2
+
+		=== READING NEXT LINE ===
+
+		=== PROCESS COMPLETE! ===
+
+
+
+
+

@@ -1,0 +1,11 @@
+to do list:
+
+
+/dev/null
+
+*
+
+/dev/fd
+
+./
+~

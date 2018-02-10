@@ -1,0 +1,27 @@
+define (x x) = (log x)
+define (g 1
+define (g 1 x) = (+ x 1)
+define (+ x +y)=(+ x +y)
+define (g x y) = (- x (+ y))
+define (g x y) = (+y 1)
+
+define (MISPARENTHESIS a b) = (+ a b ))
+define (NOTFOUND first second) = (+ (WHAT first) second)
+define (COMPLICATED_SYMBOLS & || *) = (* (+ & ||) (- * 0))
+evaluate (COMPLICATED_SYMBOLS 3 5 2)
+
+define (f x = (+ x 2))
+define (f) = (+ x 2)
+define () = (+ x 2)
+define (f x=a x=b x=c) = (+ x=a (+ x=b x=c))
+
+define (h x-b b*a) = (+ x-b b*a)
+evaluate (h 3 4)
+evaluate (h 3 0.5f)
+define (SPACING_ERROR a b) = (+(+ a b) b)
+
+define (SQRTROOT_OF_X x) = (sqrt x)
+evaluate (SQRTROOT_OF_X 4)
+evaluate (SQRTROOT_OF_X -4)
+
+evaluate (f (g 1 2) (g 3 4) (h 5 6))

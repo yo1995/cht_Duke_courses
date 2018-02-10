@@ -1,0 +1,16 @@
+define (ADD x y) = (+ x y)
+define (MINUS x y) = (- x y)
+define (TIMES x y) = (* x y)
+define (DIV x y) = (/ x y)
+define (MOD x y) = (% x y)
+define (SIN x) = (sin x)
+define (COS x) = (cos x)
+define (SQRT x) = (sqrt x)
+define (LOG x) = (log x)
+define (POW x y) = (pow x y)
+
+define (test x y) = (/ (+ (- (sqrt (POW x 3)) x) y) y)
+evaluate (test 4 5)
+
+define (test2 x y) = (/ (ADD (- (sqrt (POW x 2)) x) y) y)
+evaluate (test2 100 50)

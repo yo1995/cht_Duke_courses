@@ -15,9 +15,15 @@ A simple project of algorithm composing with Python. The project will be put in 
 
 ## References
 https://adhilton.pratt.duke.edu/ece-551
+
 http://reeves.ee.duke.edu/teaching.html
+
 http://aop.cs.cornell.edu/
+
 https://github.com/Masterqsx/qsx_duke_course
+
 https://github.com/guodonghu/ECE551Programming-Data-Structure-Algorithm-in-C-
+
 https://github.com/apriljdai/Data-Structure-and-Algorithms
+
 https://github.com/beckybai/ece590-08-2017

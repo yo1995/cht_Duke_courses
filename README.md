@@ -11,6 +11,15 @@ Some ROC curves plotting with matlab. Also an important note from Oppenheim's, a
 Really helpful and thought-provoking by Prof. Galen Reeves.
 A simple project of algorithm composing with Python. The project will be put in another repository.
 
+## ECE590 ALG
+some homework solutions with nicely implemented algorithms for those who cannot understand describing algorithms in 'simple English'
+
+## ECE590 NLP
+Project posters and reports.
+
+## ECE564 iOS
+Just a link to the real repo...
+
 ...to be continued.
 
 ## References

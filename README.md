@@ -20,6 +20,15 @@ Project posters and reports.
 ## ECE564 iOS
 Just a link to the real repo...
 
+## ECE 563 Cloud Computing
+Slides and final report
+
+## ECE590 Image Processing
+Selected reports
+
+## ECE 650
+Due to security issues, homework answers will be added later.
+
 ...to be continued.
 
 ## References

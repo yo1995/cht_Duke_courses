@@ -1,0 +1,27 @@
+sudo cat /var/log/syslog | grep
+
+sudo insmod sneaky_mod.ko
+
+
+---
+ls /home/tc233/hw5
+
+cd /home/tc233/hw5
+ls
+
+find /home/tc233 -name sneaky_process
+
+ps -a -u tc233
+
+cat /etc/passwd
+
+lsmod
+
+检查passwd strstr是否成功
+
+内核作业小记：
+像个捣蛋鬼的小朋友，搞乱了之后不知如何恢复
+官方文档不灵浪费两个夜晚debug
+清理不成功，有诸多因素
+
+documentation pr

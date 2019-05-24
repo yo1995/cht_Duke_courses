@@ -1,0 +1,8 @@
+1 LightBlue
+2 Orange
+3 Green
+4 Red
+5 DarkBlue
+6 Gold
+7 Maroon
+8 Black

@@ -1,0 +1,45 @@
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Q4: State and Color Table</h2>
+
+<table>
+
+{% if result_list %}
+    <tr>
+    <th>FIRST_NAME</th><th>LAST_NAME</th><th>UNIFORM_NUM</th>
+    </tr>
+    
+    {% for row in result_list %}
+    <tr>
+        {% for field in row %}
+            <td>{{ field }}</td>
+        {% endfor %}
+    </td>
+    {% endfor %}
+    
+{% else %}
+    <p>No results for query4 are available.</p>
+{% endif %}
+
+</table>
+</body>

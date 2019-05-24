@@ -1,0 +1,46 @@
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Q1: Average statistics Table</h2>
+
+<table>
+
+{% if result_list %}
+    <tr>
+    <th>PLAYER_ID</th><th>TEAM_ID</th><th>UNIFORM_NUM</th><th>FIRST_NAME</th><th>LAST_NAME</th><th>MPG</th><th>PPG</th><th>RPG</th><th>APG</th><th>SPG</th><th>BPG</th>
+    </tr>
+    
+    
+    {% for row in result_list %}
+    <tr>
+        {% for field in row %}
+            <td>{{ field }}</td>
+        {% endfor %}
+    </td>
+    {% endfor %}
+    
+{% else %}
+    <p>No results for query1 are available.</p>
+{% endif %}
+
+</table>
+</body>

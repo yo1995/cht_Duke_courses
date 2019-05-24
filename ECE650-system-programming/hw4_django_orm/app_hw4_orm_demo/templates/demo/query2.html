@@ -1,0 +1,46 @@
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Q2: Uniform color Table</h2>
+
+<table>
+
+{% if result_list %}
+    <tr>
+    <th>NAME</th>
+    </tr>
+    
+    
+    {% for row in result_list %}
+    <tr>
+        {% for field in row %}
+            <td>{{ field }}</td>
+        {% endfor %}
+    </td>
+    {% endfor %}
+    
+{% else %}
+    <p>No results for query2 are available.</p>
+{% endif %}
+
+</table>
+</body>

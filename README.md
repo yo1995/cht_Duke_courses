@@ -1,6 +1,8 @@
 # cht_Duke_courses
 A collection for Duke courses related code.
 
+Please also refer to my [GitLab account at school](https://gitlab.oit.duke.edu/users/tc233/projects) for more detailed information. ;-)
+
 ## ECE551 Data Structure and Algorithms
 Learnt someting about coding. Never copy code from other sources. Childish toy projects might not be severe, but industrial ones really hurts!
 
